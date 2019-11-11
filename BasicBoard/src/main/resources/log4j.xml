@@ -10,6 +10,57 @@
 		</layout>
 	</appender>
 	
+	<!-- SQL Logger -->
+
+	<logger name="jdbc.sqltiming" additivity="false">
+
+		<level value="warn" />
+
+		<appender-ref ref="console"/> 
+
+	</logger>
+
+	
+
+	<logger name="jdbc.sqlonly" additivity="false"> 
+
+		<level value="info"/> 
+
+		<appender-ref ref="console"/> 
+
+	</logger>
+
+	
+
+	<logger name="jdbc.audit" additivity="false"> 
+
+		<level value="warn"/>  
+
+		<appender-ref ref="console"/> 
+
+	</logger> 
+
+    
+
+	<logger name="jdbc.resultset" additivity="false">
+
+		<level value="warn" />
+
+		<appender-ref ref="console"/> 
+
+	</logger>
+
+     
+
+	<logger name="jdbc.resultsettable" additivity="false"> 
+
+		<level value="info"/>  
+
+		<appender-ref ref="console"/> 
+
+	</logger> 
+
+	
 	<!-- Application Loggers -->
 	<logger name="org.soas.web">
 		<level value="info" />

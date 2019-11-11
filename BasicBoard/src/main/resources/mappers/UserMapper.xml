@@ -42,13 +42,47 @@
 	</delete>
 
 	<!-- 로그인 -->
-	<!-- <select id="login" parameterType="MemberVO" resultType="MemberVO">
-		select *
-		from tbl_user
-		where userid=#{userid} and userpw=#{userpw}
-	</select> -->
+	<select id="login" parameterType="UserVO" resultType="UserVO">
+		select 
+			*
+		from 
+			tbl_user
+		where 
+			user_id=#{user_ID} and user_pw=#{user_PW};
+	</select>
+	
+	<!-- 중복체크 -->
+	<select id="checkID" parameterType="String" resultType="String">
+		select
+			user_id
+		from
+			tbl_user
+	    where
+			user_id = #{user_ID};
+	</select>
+			
+	<!-- ID 찾기 -->
+	<select id="findID" parameterType="UserVO" resultType="String">
+		select 
+			user_id
+		from
+			tbl_user
+		where
+			user_name = #{user_name}
+		and 
+			user_phoneNum = #{user_phoneNum}
+		and
+			user_email = #{user_email};
+	</select>
 	
 	<!-- PW 변경 -->
-	<!-- ID 찾기 -->
-	<!-- PW 찾기 -->
+	<select id="updatePW" parameterType="UserVO" >
+		update
+			tbl_user
+		set
+			user_pw = #{user_PW}
+		where
+			user_idx = #{user_idx};
+	</select>
+	
 </mapper>

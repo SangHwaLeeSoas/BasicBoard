@@ -65,5 +65,33 @@ public class UserServiceTester {
 		
 		service.remove(3);
 	}
+	
+	@Test
+	public void loginTest() throws Exception {
+		
+		UserVO vo = new UserVO();
+		
+		vo.setUser_ID("test123");
+		vo.setUser_PW("test123");
+		
+		service.login(vo);
+	}
+	
+	@Test
+	public void checkIDTest() throws Exception {
+		
+		service.checkID("test123");
+	}
+	
+	@Test
+	public void modifyPW() throws Exception {
+		
+		UserVO vo = new UserVO();
+		
+		vo.setUser_idx(2);
+		vo.setUser_PW("1111111112");
+		
+		service.modifyPW(vo);
+	}
 
 }

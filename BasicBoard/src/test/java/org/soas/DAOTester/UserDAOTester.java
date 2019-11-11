@@ -62,5 +62,33 @@ public class UserDAOTester {
 		
 		dao.delete(1);
 	}
+
 	
+	@Test
+	public void loginTest() throws Exception {
+		
+		UserVO vo = new UserVO();
+		
+		vo.setUser_ID("test123");
+		vo.setUser_PW("test123");
+		
+		dao.login(vo);
+	}
+	
+	@Test
+	public void checkIDTest() throws Exception {
+		
+		dao.checkID("test123");
+	}
+	
+	@Test
+	public void updatePW() throws Exception {
+		
+		UserVO vo = new UserVO();
+		
+		vo.setUser_idx(2);
+		vo.setUser_PW("111111111");
+		
+		dao.updatePW(vo);
+	}
 }

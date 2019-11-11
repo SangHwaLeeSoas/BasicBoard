@@ -39,4 +39,34 @@ public class UserDAOImpl implements UserDAO {
 		session.delete(namespace + ".delete", user_idx);
 	}
 
+	@Override
+	public UserVO login(UserVO vo) throws Exception {
+
+		return session.selectOne(namespace + ".login", vo);
+	}
+
+	@Override
+	public boolean checkID(String user_ID) throws Exception {
+
+		String loginID = session.selectOne(namespace + ".checkID", user_ID);
+		//System.out.println("loginID : " + loginID);
+		
+		boolean loginValue = loginID == null ? true : false;
+		//System.out.println("loginValue : " + loginValue);
+		
+		return loginValue;
+	}
+
+	@Override
+	public String findID(UserVO vo) throws Exception {
+
+		return session.selectOne(namespace + ".findID", vo);
+	}
+
+	@Override
+	public void updatePW(UserVO vo) throws Exception {
+
+		session.update(namespace + ".updatePW", vo);
+	}
+
 }

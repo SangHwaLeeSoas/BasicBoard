@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.soas.mapper.UserMapper">
+
+	<sql id="createSQL">
+		<if test="picture != null">
+		insert into 
+			tbl_user(mno,userid,userpw,nickname,email,picture)
+		values
+			(seq_user.nextval, #{userid},#{userpw},#{nickname},#{email},#{picture})
+		</if>
+		<if test="picture == null">
+		insert into 
+			tbl_user(mno,userid,userpw,nickname,email)
+		values
+			(seq_user.nextval, #{userid},#{userpw},#{nickname},#{email})
+		</if>
+	</sql>
+	
+	<insert id="create">
+		<include refid="createSQL"></include>
+	</insert>
+
+	<select id="read" resultType="MemberVO">
+		select *
+		from tbl_user
+		where mno = #{mno}
+	</select>
+
+	<update id="update">
+		update tbl_user
+		set
+		userpw = #{userpw, jdbcType=VARCHAR},  
+		nickname = #{nickname, jdbcType=VARCHAR}, email = #{email, jdbcType=VARCHAR}, picture = #{picture, jdbcType=VARCHAR}
+		where mno = #{mno, jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete">
+		delete from tbl_user
+		where mno = #{mno}
+	</delete>
+
+	<select id="login" parameterType="MemberVO" resultType="MemberVO">
+		select *
+		from tbl_user
+		where userid=#{userid} and userpw=#{userpw}
+	</select>
+	<select id="read1" resultType="MemberVO">
+		select *
+		from tbl_user
+		where userid = #{userid}
+	</select>
+	
+	<select id="readNick">
+		select
+			*
+		from
+			tbl_user
+		where 
+			nickname = #{nickname}
+	</select>
+
+	<update id="create_client" parameterType="hashmap">
+		update 
+			tbl_user
+		set
+			Client_ID=#{Client_ID, jdbcType=VARCHAR},
+			Client_PW=#{Client_PW, jdbcType=VARCHAR},
+			keycreatedate = sysdate
+		where
+			mno = #{mno, jdbcType=INTEGER}
+	</update>
+	
+	<update id="delete_client">
+		update 
+			tbl_user
+		set
+			Client_ID=null,
+			Client_PW=null,
+			keydeletedate = sysdate
+		where
+			mno = #{mno, jdbcType=INTEGER}
+	</update>
+	
+	<select id="checkID" resultType="String">
+	 select userid from tbl_user where userid = #{userid}
+	</select>
+	
+		<select id="checkNick" resultType="String">
+	 select nickname from tbl_user where nickname = #{nickname}
+	</select>
+
+</mapper>
